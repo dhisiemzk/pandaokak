@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Пожертвования для cryptashkin.ton</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #1a2a6c, #b21f1f, #fdbb2d, #0f2027);
+      background-size: 400% 400%;
+      animation: gradient 12s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.6);
+    }
+    .wallet {
+      font-weight: bold;
+      font-size: 1.1em;
+      background: rgba(0,0,0,0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+    .buttons {
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    a.button, button {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 25px;
+      background: rgba(0,170,255,0.8);
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-decoration: none;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    a.button:hover, button:hover {
+      background: rgba(0,136,204,0.9);
+      transform: scale(1.05);
+    }
+    input {
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>Пожертвования для cryptashkin.ton</h1>
+  <p>Вы можете поддержать проект, переведя любую сумму или NFT на TON-кошелёк:</p>
+  
+  <div class="wallet">Адрес: cryptashkin.ton</div>
+
+  <div class="buttons">
+    <a class="button" href="ton://transfer/cryptashkin.ton?amount=1000000000">1 TON</a>
+    <a class="button" href="ton://transfer/cryptashkin.ton?amount=5000000000">5 TON</a>
+    <a class="button" href="ton://transfer/cryptashkin.ton?amount=10000000000">10 TON</a>
+    <a class="button" href="ton://transfer/cryptashkin.ton?asset=nft">Передать NFT</a>
+  </div>
+
+  <p>Или введите сумму вручную:</p>
+  <input type="number" id="amount" placeholder="Введите сумму в TON" min="0.1" step="0.1">
+  <br>
+  <button onclick="sendCustom()">Отправить</button>
+
+  <script>
+    function sendCustom() {
+      let ton = document.getElementById('amount').value;
+      if (!ton || ton <= 0) {
+        alert("Введите корректную сумму в TON");
+        return;
+      }
+      let nanoton = Math.round(ton * 1000000000); // 1 TON = 1e9 нанотонов
+      let url = "ton://transfer/cryptashkin.ton?amount=" + nanoton;
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
